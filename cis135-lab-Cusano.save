@@ -1,0 +1,27 @@
+#!/bin/bash
+trap "exit" INT
+log=/home/pi/iplog.txt
+maxscrn=4
+x=0
+echo "Please enter an IP address: "
+read IP
+if [ $IP == "192.168.100.135" ]; then
+	echo "HEY I LIKE THAT ADDRESS"
+fi
+
+while :
+ do
+date=$(date '+%d/%m/%Y %H:%M:%S');
+ping -c 1 $IP > /dev/null
+if [ $? -eq 0 ]; then
+	if [ $x -le $maxscrn ]; then
+		echo "Host: $IP is up"
+	$x=$i+1]
+	fi
+else
+	echo "Host: $IP is down at: $date" | tee $log
+	let $x=0
+fi
+
+done
+
